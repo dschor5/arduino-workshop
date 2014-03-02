@@ -1,0 +1,1 @@
+Lab #7: Manual Control for Cookie Maker
