@@ -26,8 +26,8 @@ void serialEvent()
 {
  while(Serial.available())
  {
-  char dummy = Serial.read(); 
-  switch(dummy)
+  char inChar = Serial.read(); 
+  switch(inChar)
   {
    case '1':
      servoPosition=FORWARD;
