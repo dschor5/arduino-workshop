@@ -1,3 +1,5 @@
+
+
 // BISCUIT.ino - manually actuated by serial connection
 // based on "Sweep" by BARRAGAN <http://barraganstudio.com> 
 // Modified by Troy Denton for educational / workshop purposes
@@ -7,12 +9,12 @@
 #include <Servo.h> 
 
 //pin for servomotor
-const int PIN_SERVO = 9;
-const int PIN_HEIGHT_SERVO=8;
+const int PIN_BELT_SERVO = 3;
+const int PIN_LIFTER_SERVO=11;
 
-//pins for motor controller
-const int PIN_MC0 = 4;
-const int PIN_MC1 = 5;
+//pins for motor controller, dough extrusion motor
+const int PIN_MC0 = 12;
+const int PIN_MC1 = 13;
  
 Servo driveServo;  // create servo object to control a servo 
                 
@@ -23,15 +25,15 @@ const int FORWARD = 20;
 const int BACKWARD = 160;
 const int STOP = 92;
 
-//positions for extruder assembly
+//positions for extruder lifter assembly
 const int UP = 65;
 const int DOWN = 30;
 
-int servoPosition = STOP;    // variable to store the servo position 
+int conveyorDirection = STOP;    // variable to store the servo position 
 
 int extruderPosition=STOP;  //variable to store extruder command
 
-int extruderHeight=UP;
+int lifterPosition=UP;
 /*
 
 serialEvent is a function that gets called after every iteration of loop(), but only when there is Serial 
@@ -46,13 +48,13 @@ void serialEvent()
   switch(dummy)
   {
    case '1':
-     servoPosition=FORWARD;
+     conveyorDirection=FORWARD;
    break;
    case '2':
-     servoPosition=BACKWARD;
+     conveyorDirection=BACKWARD;
    break;
    case '3':
-     servoPosition=STOP;
+     conveyorDirection=STOP;
    break;
    case 'a':
      extruderPosition=FORWARD;
@@ -64,10 +66,10 @@ void serialEvent()
      extruderPosition=STOP;
    break;
    case 'u':
-     extruderHeight=UP;
+     lifterPosition=UP;
    break;
    case 'd':
-     extruderHeight=DOWN;
+     lifterPosition=DOWN;
    break;
   }
  }
@@ -77,8 +79,8 @@ void setup()
 { 
   pinMode(PIN_MC0,OUTPUT);
   pinMode(PIN_MC1,OUTPUT);
-  driveServo.attach(PIN_SERVO);  // attaches the servo on pin 9 to the servo object 
-  extruderServo.attach(PIN_HEIGHT_SERVO);
+  driveServo.attach(PIN_BELT_SERVO);  // attaches the servo on pin 9 to the servo object 
+  extruderServo.attach(PIN_LIFTER_SERVO);
   Serial.begin(9600);
   Serial.println("Starting...");
 } 
@@ -95,7 +97,7 @@ void extruderControl()
    case BACKWARD:
      digitalWrite(PIN_MC0,HIGH);
      digitalWrite(PIN_MC1,LOW);
-     Serial.println("BAckward!");
+     Serial.println("Backward!");
    break;
    case STOP:
    default:
@@ -110,7 +112,7 @@ void extruderControl()
  
 void loop() 
 { 
-  driveServo.write(servoPosition);
-  extruderServo.write(extruderHeight);
+  driveServo.write(conveyorDirection);
+  extruderServo.write(lifterPosition);
   extruderControl();
 } 
