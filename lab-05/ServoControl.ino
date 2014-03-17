@@ -36,7 +36,7 @@ void printStatus()
 {
   lcd.clear();
   lcd.print("Step size: ");//size is 11 characters
-  lcd.setCursor(11,0);  //move to 11th position and print the position
+  lcd.setCursor(11,0);  //move to 11th position and print the step size
   lcd.print(stepSize);  
   lcd.setCursor(0,1);
   lcd.print("Position:  ");//size is 11 characters
