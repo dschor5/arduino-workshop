@@ -134,67 +134,34 @@ void loop()
     }
     stopExtruder();
   }
+  else
   
     
   
   switch(currentState)
   {
    case STATE_WAIT_INPUT:
-     adc_key_in = analogRead(0);      // read the value from the sensor 
-     key = get_key(adc_key_in);       // convert into key press
-     if (key==KEY_SELECT)
-     {
-       currentState=STATE_MOVE_EXTRUDER;
-       lcd.clear();
-       lcd.print("Now Moving...");
-     }
+
+     //TODO: Compelte State logic
+
    break;
    case STATE_MOVE_EXTRUDER:
-     beltPosition=BELT_FORWARD;
-     if (digitalRead(PIN_TRAY_SENSOR)==LOW)
-     { 
-       currentState=STATE_PRINT_COOKIES;
-       beltPosition=BELT_STOP;
-       lcd.clear();
-       lcd.print("Now Printing...");
-     }
+
+     //TODO: Complete State logic
+     
     
    break; 
    case STATE_PRINT_COOKIES:
-     //scooch the belt forward a bit...
      
-     //print 2 cookies
-     for(int i = 0; i < 2; i++)
-     {
-       lifterServo.write(LIFTER_DOWN);
-       delay(TIME_BETWEEN_LIFTER_AND_EXTRUDER_MS);
-       pushExtruder();
-       delay(TIME_EXTRUDE_COOKIE_MS);
-       stopExtruder();  
-       lifterServo.write(LIFTER_UP);
-       delay(TIME_LIFTER_SETTLE_MS);
-       beltServo.write(BELT_FORWARD);
-       delay(TIME_BELT_BETWEEN_COOKIES_MS);
-       beltServo.write(BELT_STOP);
-     }
-     
-     while (digitalRead(PIN_TRAY_SENSOR)!=HIGH)
-     {
-       beltServo.write(BELT_FORWARD);
-     }  
-     currentState=STATE_FINISH;
+     //TODO: Compelte State logic
      
    break;
    case STATE_FINISH:
-     beltPosition=BELT_STOP; 
-     lcd.clear();
-     lcd.print("Done!");
-     delay(1000);
-     currentState=STATE_WAIT_INPUT;
-     lcd.clear();
-     lcd.print("Press Select...");
+
+     //TODO: Compelte State logic
 
    break;
+
       
   }
   beltServo.write(beltPosition);
