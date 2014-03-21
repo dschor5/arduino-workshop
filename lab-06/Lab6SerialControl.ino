@@ -15,7 +15,8 @@ const int BACKWARD = 160;
 const int STOP = 92;
 int servoPosition = STOP;    // variable to store the servo position 
 
-
+//our sensor pin
+const int PIN_SENSOR = 2;
 /*
 
 serialEvent is a function that gets called after every iteration of loop(), but only when there is Serial 
@@ -44,9 +45,11 @@ void serialEvent()
 }
 void setup() 
 { 
+  pinMode(PIN_SENSOR,INPUT);
   driveServo.attach(9);  // attaches the servo on pin 9 to the servo object 
   Serial.begin(9600);
   Serial.println("Starting...");
+  
 } 
  
  
