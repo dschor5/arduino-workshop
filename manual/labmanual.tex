@@ -324,6 +324,11 @@ myServo.attach(servoPin);	//servoPin is the pin used to send pulses
 myServo.write(90);	//move the servo to the 90 degree (neutral) position
 \end{listing}
 
+%part 1 - use left/right buttons to move forward, backward
+
+
+%part 2 - use up/down to adjust step size, display state on LCD
+
 
 
 \end{homeworkProblem}
@@ -336,7 +341,17 @@ myServo.write(90);	//move the servo to the 90 degree (neutral) position
 
 \begin{homeworkProblem}[Continuous Servo Motor]
 
+In the hobbyist RC market, the servo protocol is widely used - some remote control receivers output standard servo pulses for all channels, for example.  In some instances, hobbyists want to control a standard motor from these servo commands.  As you have likely found, however, regular servos have a limited rotation range, so to get around this, `continuous rotation' servos have become commercially available.  These typically do not have any speed control - only forwards, backwards, or stop.  In our lab apparatus, we use a continuous rotation servo to control the conveyor belt.
 
+%part 1- move via serial
+For part 1, control your continuous rotation servo via serial command.  This is a common technique to control arduino-based hardware from a PC - it is easy to write programs that communicate via USB serial port.
+
+
+%part 2 - move via LCD interface
+Move the continuous rotation servo via LCD interface
+
+%part 3 - move until optical satisfies
+Move the continuous rotation servo until the optical sensor becomes obstructed
 
 \end{homeworkProblem}
 \clearpage
@@ -349,6 +364,16 @@ myServo.write(90);	//move the servo to the 90 degree (neutral) position
 \begin{homeworkProblem}[System Integration - Manual Control Mode]
 
 
+%insert diagram of lab apparatus
+
+In this lab, we will begin interfacing to the lab apparatus.  
+
+The user should be able to:
+\li{Use the left/right buttons to move the conveyor belt}
+\li{Use the up/down buttons to move the lifter assembly}
+\li{use the 'Select' button to push the extruder}
+
+This will allow you to determine timing constants for the various operations required for the full integration in exercise 8
 
 \end{homeworkProblem}
 \clearpage
@@ -361,6 +386,10 @@ myServo.write(90);	//move the servo to the 90 degree (neutral) position
 \begin{homeworkProblem}[System Integration - Automatic Mode]
 
 
+In automatic mode, the user should be able to push the "Select" button and print {\em at least two} cookies on the tray.  A state machine approach is recommended, and provided partially in the example code.  
+
+
+Super bonus awesome points: Let the user select the number of cookies to print via the LCD interface... but keep a safety check to ensure the extruder only actuates when there is a tray underneath it!
 
 \end{homeworkProblem}
 \clearpage
