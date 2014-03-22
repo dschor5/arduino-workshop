@@ -57,6 +57,7 @@
 \renewcommand\footrulewidth{0.4pt} % Size of the footer rule
 
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
+\setlength{\parskip}{6pt} % Add a little space between paragraphs
 
 %----------------------------------------------------------------------------------------
 %	CODE INCLUSION CONFIGURATION
@@ -303,7 +304,19 @@ Your task is to use the LCD library to write "IEEE Workshop" and "I want cookies
 
 \section{Button interactions}
 
+In this Arduino shield, all the buttons are read through a single analog pin. Each button has a different resistance associated with it and therefore produces a different value when pressed. This is not ideal for some applications where users can press multiple buttons simultaneously, but it is convenient for our example because it does not use many analog input pins. 
+
+Example 3b shows how to read the buttons and display a message depending on which button was pressed.
+
+Example 3c shows how to create custom characters to display on the LCD.
+
+Your task is to combine examples 3b and 3c. Place pacman at position (0, 0) to start the program. Use the buttons left, right, top, and bottom to move pacman across the screen. Make sure that pacman does not leave the screen dimensions. 
+
 \section{Serial pass through from IDE to LCD}
+
+Example 3d shows how you can pass data from the IDE to the LCD. Run the example, open the serial monitor, and type some data into the input field. The data will be displayed on the LCD on the top row. This is a useful way to send commands to the Arduino from the console. 
+
+Your task is to repeat the pacman lab but using the IDE to enter 'u'-UP, 'd'-DOWN, 'r'-RIGHT, and 'l'-LEFT. 
 
 \end{homeworkProblem}
 \clearpage
