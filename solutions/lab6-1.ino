@@ -10,6 +10,7 @@ Servo driveServo;  // create servo object to control a servo
                 
 
 //There is no concept of position in a "continuous rotation" servo - only Forward, Backward, and Stop
+const int PIN_BELT_SERVO = 11;
 const int FORWARD = 20;
 const int BACKWARD = 160;
 const int STOP = 92;
@@ -28,14 +29,25 @@ void serialEvent()
  while(Serial.available())
  {
   char inChar = Serial.read(); 
-  //TODO: change the direction based on serial input.  The user should be able to move the belt forward, backward, or stop it
+  switch(inChar)
+  {
+    case '1':
+      servoPosition=FORWARD;
+    break;
+    case '2':
+      servoPosition=BACKWARD;
+    break;
+    case '3':
+      servoPosition=STOP;
+    break;
+  }
  }
 
 }
 void setup() 
 { 
   pinMode(PIN_SENSOR,INPUT);
-  driveServo.attach(9);  // attaches the servo on pin 9 to the servo object 
+  driveServo.attach(PIN_BELT_SERVO);  // attaches the servo on pin 9 to the servo object 
   Serial.begin(9600);
   Serial.println("Starting...");
   

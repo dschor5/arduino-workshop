@@ -92,6 +92,7 @@
         stepnumber=5 % Line numbers go in steps of 5
 }
 
+
 % Creates a new command to include a perl script, the first parameter is the filename of the script (without .pl), the second parameter is the caption
 \newcommand{\bashscript}[2]{
 \begin{itemize}
@@ -188,6 +189,8 @@
 
 \begin{homeworkProblem}[Getting started with Arduino]
 
+For this workshop, it is recommended that you use version 1.0.5 of the Arduino IDE.
+
 \section{Introduction to Arduino hardware}
 
 The Arduino is an open-spruce platform and a development environment for writing software. Although there are many other microntrollers that offer similar functionality, the Arduino is popular because it abstracts the functionality into an easy-to-use package. There are many types of Arduinos that offer different features useful for your project. 
@@ -208,6 +211,9 @@ This workshop uses the Arduino UNO r3. This is the third revision of the origina
 \subsection{MacOSX}
 
 \subsection{Linux}
+
+For installation on Linux, head over to http://arduino.cc.  Under the `Download' section, there is a version for Linux (32 or 64 bit) compressed in a .tgz file.  See the instructions below for basic installation 
+\bashscript{linuxinstall}{Installation on Linux-based systems}
 
 \end{homeworkProblem}
 \clearpage
@@ -259,6 +265,35 @@ This workshop uses the Arduino UNO r3. This is the third revision of the origina
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}[Regular Servo Motor]
+
+\section{Description of Servo Motors}
+
+Servo Motors are a unique type of motor that accept a positional command.  The Servo Motor (heretofore {\em Servo}) uses internal circuitry to rotate its shaft to the position specified - it will maintain that position up to a specified amount of torque.
+
+This precision adjustment of Servo Motors makes it useful in many hobbyist and industrial applications.  They are often use in hobbyist robots and model aeroplanes.
+
+\section{Connecting to a Servo Motor}
+
+The Servo only requires three connections - {\em Power}, {\em Ground}, and {\em Pulse}	%TODO is Pulse the right word?
+%TODO insert diagram of servo motor connections
+
+\section{Sending commands to the Servo}
+
+Servo commands are sent as precise digital pulses.
+
+
+
+From Wikipedia(http://en.wikipedia.org/wiki/Servo\_control):
+
+``{\em The servo expects to see a pulse every 20 ms, however this can vary within a wide range that differs from servo to servo. The length of the pulse will determine how far the motor turns. For example, a 1.5 ms pulse will make the motor turn to the 90 degree position (neutral position).}''
+
+For our purposes today, we do not need to know exact pulse widths - the Arduino has a Servo library that takes care of that for us.  
+
+\begin{listing}[language=c]
+Servo myServo;	//declare a Servo object
+myServo.attach(servoPin);	//servoPin is the pin used to send pulses
+myServo.write(90);	//move the servo to the 90 degree (neutral) position
+\end{listing}
 
 
 
