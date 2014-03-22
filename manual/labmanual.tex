@@ -193,16 +193,54 @@ For this workshop, it is recommended that you use version 1.0.5 of the Arduino I
 
 \section{Introduction to Arduino hardware}
 
+The Arduino is an open-spruce platform and a development environment for writing software. Although there are many other microntrollers that offer similar functionality, the Arduino is popular because it abstracts the functionality into an easy-to-use package. There are many types of Arduinos that offer different features useful for your project. 
+
+This workshop uses the Arduino UNO r3. This is the third revision of the original platform using an ATmega328 processor operating at 5~V. The processor operates at 16~MHz and has 32~KB or flash memory, 2~KB of SRAM memory, and a 1~KB EEPROM memory. The board provides access to 14~digital input/output pins and 6~analog pins that are sufficient for simple projects. The parts of the Arduino are shown in Fig.~\ref{fig:}
+\begin{description}
+\item[Digital ports] - Ports for controlling input/outputs. Some of these pins can be configured for pulse-width modulation. I/O pins can drive up to 40~mA.
+\item[Reset button] - Resets the processor (may be located next to the USB Programmer in some boards)
+\item[Processor] - ATmega328 microprocessor.
+\item[Analog ports] - Analog ports for reading/writing continuous values.
+\item[Reference voltages] - Reference voltage used for interfacing devices.
+\item[External power] - Connection to plug in a 7-12V power supply. 
+\item[USB programmer] - Input to program the processor from a computer or provide power from a USB adapter. Can also be used to communicate with a computer through a serial interface.
+\item[LED] - User programmable LED controlled through I/O pin 13.
+\end{description}
+
+
+% insert picture of Arduino
+
+
 \section{Installing the Arduino IDE}
 
 \subsection{Windows}
 
+There is an installer and a zip file option for Windows. The zip file is recommended as it allows you to run everything from the location you specify. Simply download and unzip the file from \url{http://arduino.cc/en/Main/Software}.
+
 \subsection{MacOSX}
+
+Download the zip file from \url{http://arduino.cc/en/Main/Software} and copy the Arduino software to your Applications directory.
 
 \subsection{Linux}
 
 For installation on Linux, head over to http://arduino.cc.  Under the `Download' section, there is a version for Linux (32 or 64 bit) compressed in a .tgz file.  See the instructions below for basic installation 
 \bashscript{linuxinstall}{Installation on Linux-based systems}
+
+\section{Using the Arduino IDE}
+
+The Arduino IDE is shown in Fig~\ref{}. The programs in Arduino are sometimes called "sketches" and are shown in the middle region with the white background. The black background region at the bottom is for compiler messages. The key buttons in the interface are:
+\begin{description}
+\item[Checkmark] - Check the code for syntax errors.
+\item[Right arrow] - Download program to processor.
+\item[Magnifying glass] - Open a serial monitor to send/receive data from the processor.
+\end{description}
+
+Other important menus to note are:
+\begin{description}
+\item[File$\rightarrow$Examples] - List of examples provided with the IDE. Great way to learn about Arduinos.
+\item[Tools$\rightarrow$Board] - Allows you to select what processor you are using. Most people here are working with the Arduino UNO, however the same IDE  (and in some cases the same software) can be used for other processors.
+\item[Tools$\rightarrow$Serial Port] - Allows you to select the serial port (USB port) you are using to program your Arduino. 
+\end{description}
 
 \end{homeworkProblem}
 \clearpage
@@ -215,6 +253,8 @@ For installation on Linux, head over to http://arduino.cc.  Under the `Download'
 \begin{homeworkProblem}[Blinky]
 
 \section{Using on-board LED}
+
+
 
 \section{Adding an LED to the Arduino}
 
