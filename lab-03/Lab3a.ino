@@ -58,11 +58,8 @@ void setup()
   // Clear the LCD screen
   lcd.clear(); 
   
-  // Set the message on the screen
-  lcd.setCursor(0, 0);
-  lcd.print("IEEE Workshop.");
-  lcd.setCursor(0, 1);
-  lcd.print("I want cookies!");
+  // Set initial message
+  
 }
 
 /***
@@ -72,28 +69,13 @@ void setup()
 void loop()
 {
   // Scroll text left
-  for (int i = 0; i < NUM_COLS; i++) {
-    // scroll one position left:
-    lcd.scrollDisplayLeft(); 
-    // wait a bit:
-    delay(500);
-  }
+  
 
   // Scroll text right (past the end of the screen)
-  for (int i = 0; i < NUM_COLS * 2; i++) {
-    // scroll one position right:
-    lcd.scrollDisplayRight(); 
-    // wait a bit:
-    delay(500);
-  }
   
-    // Scroll text back to initial position
-  for (int i = 0; i < NUM_COLS; i++) {
-    // scroll one position left:
-    lcd.scrollDisplayLeft(); 
-    // wait a bit:
-    delay(500);
-  }
+  
+  // Scroll text back to initial position
+  
   
   // delay at the end of the full loop:
   delay(1000);
