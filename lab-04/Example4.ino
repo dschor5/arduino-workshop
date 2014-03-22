@@ -14,6 +14,8 @@
 void setup() {
   // Initialize monitor with 9600 baud rate.
   Serial.begin(9600);
+  pinMode(13, OUTPUT);  
+  digitalWrite(13, HIGH);
 }
 
 /***
