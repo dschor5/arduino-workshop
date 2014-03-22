@@ -332,13 +332,13 @@ Your tasks is to write a program that turns on an external LED when the sensor i
 
 \begin{homeworkProblem}[Regular Servo Motor]
 
-\section{Description of Servo Motors}
+\subsection{Description of Servo Motors}
 
 Servo Motors are a unique type of motor that accept a positional command.  The Servo Motor (heretofore {\em Servo}) uses internal circuitry to rotate its shaft to the position specified - it will maintain that position up to a specified amount of torque.
 
 This precision adjustment of Servo Motors makes it useful in many hobbyist and industrial applications.  
 
-\section{Connecting to a Servo Motor}
+\subsubsection{Connecting to a Servo Motor}
 
 The Servo only requires three connections - {\em Power}, {\em Ground}, and {\em Pulse}.   Connect the regular servo motor's pulse pin to {\em D3} on the arduino.
 %TODO insert diagram of servo motor connections
@@ -360,7 +360,7 @@ When you wish to connect the Servo motor through the LCD shield, refer to Figure
 \label{LCDShield}
 \end{figure}
 
-\section{Sending commands to the Servo}
+\subsubsection{Sending commands to the Servo}
 
 Servo commands are sent as precise digital pulses.
 
@@ -379,8 +379,8 @@ myServo.write(90);	//move the servo to the 90 degree (neutral) position
 \end{lstlisting}
 
 %part 1 - use left/right buttons to move forward, backward
-
-\section{Control position with left/right buttons}
+%\section{Exercises}
+\subsection{Control position with left/right buttons}
 
 In this section, use the `Left' and `Right' keys on the LCD interface to increase/decrease the rotational position of the servo motor.  See {\em lab5.ino} for a starting point!
 
@@ -388,7 +388,7 @@ In this section, use the `Left' and `Right' keys on the LCD interface to increas
 %part 2 - use up/down to adjust step size, display state on LCD
 
 
-\section{Control step size with up/down buttons}
+\subsection{Control step size with up/down buttons}
 
 In addition to the controls for the `Left' and `Right' keys, use the `Up' and `Down' buttons on the LCD interface to increase the step size.  
 
@@ -413,8 +413,10 @@ In the hobbyist RC market, the servo protocol is widely used - some remote contr
 \label{continuousServo}
 \end{figure}
 
+%\section{Exercises}
+
 %part 1- move via serial
-\section{Control via Serial Port}
+\subsection{Control via Serial Port}
 For part 1, control your continuous rotation servo via serial command.  This is a common technique to control arduino-based hardware from a PC - it is easy to write programs that communicate via USB serial port.  Refer to Listing ~\ref{serialEventCode} for an example on how to read serial output from a PC, and check out {\em lab6.ino  } for a starting point for the following exercises!
 
 
@@ -440,7 +442,7 @@ void serialEvent()
 
 
 %part 2 - move via LCD interface
-\section{Control via LCD interface}
+\subsection{Control via LCD interface}
 Move the continuous rotation servo via LCD interface.  The controls should work as so:
 \begin{itemize}
 \item holding Left or Right should make the servo rotate clockwise or counterclockwise, respectively
@@ -450,7 +452,7 @@ See {\em lab6.ino} for a starting point!
 
 
 %part 3 - move until optical satisfies
-\section{Control via optical sensor}
+\subsection{Control via optical sensor}
 Move the continuous rotation servo until the optical sensor becomes obstructed.  Hint - re-use your code from exercise 4!
 See {\em lab6.ino} for a starting point!
 
