@@ -332,11 +332,11 @@ Your task is to repeat the pacman lab but using the IDE to enter 'u'-UP, 'd'-DOW
 
 Servo Motors are a unique type of motor that accept a positional command.  The Servo Motor (heretofore {\em Servo}) uses internal circuitry to rotate its shaft to the position specified - it will maintain that position up to a specified amount of torque.
 
-This precision adjustment of Servo Motors makes it useful in many hobbyist and industrial applications.  They are often use in hobbyist robots and model aeroplanes.
+This precision adjustment of Servo Motors makes it useful in many hobbyist and industrial applications.  
 
 \section{Connecting to a Servo Motor}
 
-The Servo only requires three connections - {\em Power}, {\em Ground}, and {\em Pulse}	
+The Servo only requires three connections - {\em Power}, {\em Ground}, and {\em Pulse}.   Connect the regular servo motor's pulse pin to {\em D3} on the arduino.
 %TODO insert diagram of servo motor connections
 
 \begin{figure}[ht!]
@@ -346,7 +346,7 @@ The Servo only requires three connections - {\em Power}, {\em Ground}, and {\em 
 \label{regularServo}
 \end{figure}
 
-If you wish to connect the Servo motor through the LCD shield, refer to blah for the connection mapping
+When you wish to connect the Servo motor through the LCD shield, refer to Figure ~\ref{LCDShield} for the connection mapping.
 
 
 \begin{figure}[ht!]
@@ -362,7 +362,7 @@ Servo commands are sent as precise digital pulses.
 
 
 
-From Wikipedia(http://en.wikipedia.org/wiki/Servo\_control):
+From Wikipedia (\url{http://en.wikipedia.org/wiki/Servo\_control}):
 
 ``{\em The servo expects to see a pulse every 20 ms, however this can vary within a wide range that differs from servo to servo. The length of the pulse will determine how far the motor turns. For example, a 1.5 ms pulse will make the motor turn to the 90 degree position (neutral position).}''
 
@@ -394,17 +394,61 @@ myServo.write(90);	//move the servo to the 90 degree (neutral) position
 
 \begin{homeworkProblem}[Continuous Servo Motor]
 
-In the hobbyist RC market, the servo protocol is widely used - some remote control receivers output standard servo pulses for all channels, for example.  In some instances, hobbyists want to control a standard motor from these servo commands.  As you have likely found, however, regular servos have a limited rotation range, so to get around this, `continuous rotation' servos have become commercially available.  These typically do not have any speed control - only forwards, backwards, or stop.  In our lab apparatus, we use a continuous rotation servo to control the conveyor belt.
+In the hobbyist RC market, the servo protocol is widely used - some remote control receivers output standard servo pulses for all channels, for example.  In some instances, hobbyists want to control a standard motor from these servo commands.  As you have likely found, however, regular servos have a limited rotation range, so to get around this, `continuous rotation' servos have become commercially available.  These typically do not have any speed control - only forwards, backwards, or stop.  In our lab apparatus, we use a continuous rotation servo to control the conveyor belt.  For this example, connect the continuous servo's pulse pin to {\em D11} on the arduino.  Refer to Figure ~\ref{continuousServo} for a connection diagram.
+
+
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.75]{continuous_servo.png}
+\caption{Connection for Continuous Rotation Servo motor. Battery represents 5VDC bench supply. Note: refer to Figure ~\ref{LCDShield} to connect through the LCD shield}
+\label{continuousServo}
+\end{figure}
 
 %part 1- move via serial
+\section{Control via Serial Port}
 For part 1, control your continuous rotation servo via serial command.  This is a common technique to control arduino-based hardware from a PC - it is easy to write programs that communicate via USB serial port.
 
 
+\begin{lstlisting}[language=C]
+
+
+// serialEvent() is called after every iteration of 'loop', when there is serial data 
+// available
+void serialEvent()
+{
+  while(Serial.available())  // Serial.available() tells us if there are characters 
+                             // to process in the receive buffer
+  {
+    char inChar = Serial.read();  // Serial.read() returns the first character in 
+                                  // the serial receive buffer
+
+    /*
+
+    Act on serial data here
+
+    */
+  }
+
+}
+
+\end{lstlisting}
+
+
 %part 2 - move via LCD interface
-Move the continuous rotation servo via LCD interface
+\section{Control via LCD interface}
+Move the continuous rotation servo via LCD interface.  The controls should work as so:
+\begin{itemize}
+\item holding Left or Right should make the servo rotate clockwise or counterclockwise, respectively
+\item the motor should not move when no keys are pressed
+\end{itemize}
+See {\em lab5-2.ino} for a starting point!
+
 
 %part 3 - move until optical satisfies
-Move the continuous rotation servo until the optical sensor becomes obstructed
+\section{Control via optical sensor}
+Move the continuous rotation servo until the optical sensor becomes obstructed.  
+See {\em lab5-3.ino} for a starting point!
 
 \end{homeworkProblem}
 \clearpage
@@ -422,9 +466,11 @@ Move the continuous rotation servo until the optical sensor becomes obstructed
 In this lab, we will begin interfacing to the lab apparatus.  
 
 The user should be able to:
-\li{Use the left/right buttons to move the conveyor belt}
-\li{Use the up/down buttons to move the lifter assembly}
-\li{use the 'Select' button to push the extruder}
+\begin{itemize}
+\item Use the left/right buttons to move the conveyor belt
+\item Use the up/down buttons to move the lifter assembly
+\item Use the 'Select' button to push the extruder
+\end{itemize}
 
 This will allow you to determine timing constants for the various operations required for the full integration in exercise 8
 
