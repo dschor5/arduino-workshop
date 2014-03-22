@@ -323,8 +323,25 @@ This precision adjustment of Servo Motors makes it useful in many hobbyist and i
 
 \section{Connecting to a Servo Motor}
 
-The Servo only requires three connections - {\em Power}, {\em Ground}, and {\em Pulse}	%TODO is Pulse the right word?
+The Servo only requires three connections - {\em Power}, {\em Ground}, and {\em Pulse}	
 %TODO insert diagram of servo motor connections
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.75]{regular_servo.png}
+\caption{Connection for Regular Servo motor. Battery represents 5VDC bench supply!}
+\label{regularServo}
+\end{figure}
+
+If you wish to connect the Servo motor through the LCD shield, refer to blah for the connection mapping
+
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.75]{lcd_shield.png}
+\caption{Arduino connections mapped through LCD shield}
+\label{LCDShield}
+\end{figure}
 
 \section{Sending commands to the Servo}
 
@@ -338,18 +355,21 @@ From Wikipedia(http://en.wikipedia.org/wiki/Servo\_control):
 
 For our purposes today, we do not need to know exact pulse widths - the Arduino has a Servo library that takes care of that for us.  
 
-\begin{listing}[language=c]
+\begin{lstlisting}[language=C]
 Servo myServo;	//declare a Servo object
 myServo.attach(servoPin);	//servoPin is the pin used to send pulses
 myServo.write(90);	//move the servo to the 90 degree (neutral) position
-\end{listing}
+\end{lstlisting}
 
 %part 1 - use left/right buttons to move forward, backward
+
+\section{Control position with left/right buttons}
 
 
 %part 2 - use up/down to adjust step size, display state on LCD
 
 
+\section{Control step size with up/down buttons}
 
 \end{homeworkProblem}
 \clearpage
