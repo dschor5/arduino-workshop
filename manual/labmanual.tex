@@ -196,7 +196,18 @@ For this workshop, it is recommended that you use version 1.0.5 of the Arduino I
 
 The Arduino is an open-spruce platform and a development environment for writing software. Although there are many other microntrollers that offer similar functionality, the Arduino is popular because it abstracts the functionality into an easy-to-use package. There are many types of Arduinos that offer different features useful for your project. 
 
-This workshop uses the Arduino UNO r3. This is the third revision of the original platform using an ATmega328 processor operating at 5~V. The processor operates at 16~MHz and has 32~KB or flash memory, 2~KB of SRAM memory, and a 1~KB EEPROM memory. The board provides access to 14~digital input/output pins and 6~analog pins that are sufficient for simple projects. The parts of the Arduino are shown in Fig.~\ref{fig:}
+This workshop uses the Arduino UNO r3. This is the third revision of the original platform using an ATmega328 processor operating at 5~V. The processor operates at 16~MHz and has 32~KB or flash memory, 2~KB of SRAM memory, and a 1~KB EEPROM memory. The board provides access to 14~digital input/output pins and 6~analog pins that are sufficient for simple projects. The parts of the Arduino are shown in Fig.~\ref{fig:arduinoparts}
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=4in]{./arduino.pdf}
+		\caption{Parts of an Arduino UNO}
+		\label{fig:arduinoparts}
+	\end{center}
+\end{figure}
+
+
+
 \begin{description}
 \item[Digital ports] - Ports for controlling input/outputs. Some of these pins can be configured for pulse-width modulation. I/O pins can drive up to 40~mA.
 \item[Reset button] - Resets the processor (may be located next to the USB Programmer in some boards)
@@ -227,9 +238,21 @@ Download the zip file from \url{http://arduino.cc/en/Main/Software} and copy the
 For installation on Linux, head over to http://arduino.cc.  Under the `Download' section, there is a version for Linux (32 or 64 bit) compressed in a .tgz file.  See the instructions below for basic installation 
 \bashscript{linuxinstall}{Installation on Linux-based systems}
 
+
+\clearpage
 \section{Using the Arduino IDE}
 
-The Arduino IDE is shown in Fig~\ref{}. The programs in Arduino are sometimes called "sketches" and are shown in the middle region with the white background. The black background region at the bottom is for compiler messages. The key buttons in the interface are:
+The Arduino IDE is shown in Fig~\ref{fig:arduinoide}. The programs in Arduino are sometimes called "sketches" and are shown in the middle region with the white background. The black background region at the bottom is for compiler messages. 
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=4in]{./ide.pdf}
+		\caption{Arduino IDE}
+		\label{fig:arduinoide}
+	\end{center}
+\end{figure}
+
+The key buttons in the interface are:
 \begin{description}
 \item[Checkmark] - Check the code for syntax errors.
 \item[Right arrow] - Download program to processor.
@@ -262,6 +285,14 @@ Modify the program to blink the message "COOKIES" in morse code. The LED should 
 \section{Adding an LED to the Arduino}
 
 Once your code is working, add an LED connected between PIN 13 and GND. Nothing should change, but now your program will control the external LED.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=4in]{./led.pdf}
+		\caption{Connecting an LED to pin 13}
+		\label{fig:led}
+	\end{center}
+\end{figure}
 
 \end{homeworkProblem}
 \clearpage
