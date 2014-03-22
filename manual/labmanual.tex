@@ -192,7 +192,7 @@
 
 For this workshop, it is recommended that you use version 1.0.5 of the Arduino IDE.
 
-\section{Introduction to Arduino hardware}
+\subsection{Introduction to Arduino hardware}
 
 The Arduino is an open-spruce platform and a development environment for writing software. Although there are many other microntrollers that offer similar functionality, the Arduino is popular because it abstracts the functionality into an easy-to-use package. There are many types of Arduinos that offer different features useful for your project. 
 
@@ -223,24 +223,24 @@ This workshop uses the Arduino UNO r3. This is the third revision of the origina
 % insert picture of Arduino
 
 
-\section{Installing the Arduino IDE}
+\subsection{Installing the Arduino IDE}
 
-\subsection{Windows}
+\subsubsection{Windows}
 
 There is an installer and a zip file option for Windows. The zip file is recommended as it allows you to run everything from the location you specify. Simply download and unzip the file from \url{http://arduino.cc/en/Main/Software}.
 
-\subsection{MacOSX}
+\subsubsection{MacOSX}
 
 Download the zip file from \url{http://arduino.cc/en/Main/Software} and copy the Arduino software to your Applications directory.
 
-\subsection{Linux}
+\subsubsection{Linux}
 
 For installation on Linux, head over to http://arduino.cc.  Under the `Download' section, there is a version for Linux (32 or 64 bit) compressed in a .tgz file.  See the instructions below for basic installation 
 \bashscript{linuxinstall}{Installation on Linux-based systems}
 
 
 \clearpage
-\section{Using the Arduino IDE}
+\subsection{Using the Arduino IDE}
 
 The Arduino IDE is shown in Fig~\ref{fig:arduinoide}. The programs in Arduino are sometimes called "sketches" and are shown in the middle region with the white background. The black background region at the bottom is for compiler messages. 
 
@@ -276,13 +276,13 @@ Other important menus to note are:
 
 \begin{homeworkProblem}[Blinky]
 
-\section{Using on-board LED}
+\subsection{Using on-board LED}
 
 Download and run "Example2.ino". You will see the on-board LED blink at  1~Hz. 
 
 Modify the program to blink the message "COOKIES" in morse code. The LED should be ON for 500~ms for a dash, and 200~ms for a dot. The spacing between symbols should be 200~ms and 600~ms between words. Fill in the blank for the sendLetter(), dot(), and dash() functions of the lab.
 
-\section{Adding an LED to the Arduino}
+\subsection{Adding an LED to the Arduino}
 
 Once your code is working, add an LED connected between PIN 13 and GND. Nothing should change, but now your program will control the external LED.
 
@@ -306,7 +306,7 @@ Once your code is working, add an LED connected between PIN 13 and GND. Nothing 
 
 The Liquid Crystal Display (LCD) used in this lab has two rows of 16 characters. To control it, we can use the LCD library from Arduino found in \url{http://arduino.cc/en/Reference/LiquidCrystal}. This is a generic library that allows you to connect multiple types of LCDs, send text, scroll text, and more. 
 
-\section{Writing to the display}
+\subsection{Writing to the display}
 
 Example 3a shows how to configure this LCD shield and write text to the screen. This will print "IEEE Workshop" on the first line and then blink the messages, "Troy!" and "I want cookies!" on the second line. 
 
@@ -320,7 +320,7 @@ The key commands from the library are:
 
 Your task is to use the LCD library to write "IEEE Workshop" and "I want cookies!" to the two lines on the LCD. Then, in the loop, scroll the text all the way left (until you can't see anything), all the way right (until it is outside the screen), and loop again. 
 
-\section{Button interactions}
+\subsection{Button interactions}
 
 In this Arduino shield, all the buttons are read through a single analog pin. Each button has a different resistance associated with it and therefore produces a different value when pressed. This is not ideal for some applications where users can press multiple buttons simultaneously, but it is convenient for our example because it does not use many analog input pins. 
 
@@ -330,7 +330,7 @@ Example 3c shows how to create custom characters to display on the LCD.
 
 Your task is to combine examples 3b and 3c. Place pacman at position (0, 0) to start the program. Use the buttons left, right, top, and bottom to move pacman across the screen. Make sure that pacman does not leave the screen dimensions. 
 
-\section{Serial pass through from IDE to LCD}
+\subsection{Serial pass through from IDE to LCD}
 
 Example 3d shows how you can pass data from the IDE to the LCD. Run the example, open the serial monitor, and type some data into the input field. The data will be displayed on the LCD on the top row. This is a useful way to send commands to the Arduino from the console. 
 
@@ -347,11 +347,80 @@ Your task is to repeat the pacman lab but using the IDE to enter 'u'-UP, 'd'-DOW
 
 \begin{homeworkProblem}[Optical Sensor]
 
+\subsection{Reading with analogRead()}
+
 Arduino abstracts analog reads into functions that are independent on the type of converter. When a value is read using analogRead(PIN), it returns a value between 0 and 1023 which maps to 0~V to 5~V respectively. 
 
 Example 4 uses an optical sensor. The sensor has an LED on the side marked with the letter "S". The anode (+) is the top pin and can be connected to pin 13 on the board. The cathode can be connected to ground. This allows you to turn on/off the sensor using an I/O pin. The other side acts like a phototransistor. The top pin is the analog value and the bottom is ground. When you connect this circuit and open the serial monitor, you will see the values change when blocking the sensor (i.e., putting a piece of paper to block the light). 
 
 Your tasks is to write a program that turns on an external LED when the sensor is blocked.
+
+\subsection{Reading with digitalRead()}
+
+
+Alternatively, you can read the sensor as a logic level input.  For many applications, this will suffice - we only need to know if something is either blocking, or not blocking sensor.  Try using the {\em digitalRead()} command with the optical sensor - refer to the code in Listing ~\ref{opticalDigitalRead} for an example of setting this up!
+
+
+\begin{lstlisting}[language={C},caption={Reading an Optical Sensor with digitalRead},label={opticalDigitalRead}]
+
+const int PIN_SENSOR=2;	//Replace with your sensor pin as necessary
+
+pinMode(PIN_SENSOR,INPUT);
+
+int state = digitalRead(PIN_SENSOR);	
+
+\end{lstlisting}
+
+
+
+\subsection{Timing analysis}
+
+The difference between an {\em analogRead()} and {\em digitalRead()} may seem trivial, but to illustrate the difference in hardware requirements, try playing with the code in ~\ref{timingAnalysis}
+
+\begin{lstlisting}[language={C},caption={Timing analysis base code},label={timingAnalysis}]
+
+
+unsigned long t1, t2, tdelta;
+
+const int PIN_SENSOR=2;
+
+void setup()
+{
+ 
+ Serial.begin(9600); 
+
+}
+
+void loop()
+{
+
+  int i;
+  pinMode(PIN_SENSOR,INPUT);
+  t1 = millis();	//millis returns the number of milliseconds since the arduino turned on	
+  for(i=0;i<1000;i++) 
+    int dummy = digitalRead(PIN_SENSOR);
+  t2 = millis();
+  tdelta = t2 - t1;
+  Serial.print("Time for 1000 digitalRead's is approximately: ");
+  Serial.print(tdelta);
+  Serial.println(" mS!");
+  
+
+  t1 = millis();	//millis returns the number of milliseconds since the arduino turned on	
+
+  for(i=0;i<1000;i++) 
+    int dummy = analogRead(PIN_SENSOR);
+  t2 = millis();
+  tdelta = t2 - t1;
+  Serial.print("Time for 1000 analogRead's is approximately: ");
+  Serial.print(tdelta);
+  Serial.println(" mS!");
+  
+
+}
+
+
+\end{lstlisting}
 
 \end{homeworkProblem}
 \clearpage
