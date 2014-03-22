@@ -89,7 +89,7 @@ void setup()
   lcd.begin(NUM_COLS, NUM_ROWS);
   
   // Print message to first line
-  lcd.print(0, 0);
+  lcd.setCursor(0, 0);
   lcd.print("IEEE Workshop");
 }
 
