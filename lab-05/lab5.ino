@@ -15,10 +15,11 @@ const int NUM_KEYS = 5;
 int adc_key_val[NUM_KEYS] = {50, 200, 400, 600, 800 };
 int adc_key_in;
 int key = KEY_NONE;
-int oldkey = KEY_NONE;
+
 
 
 //Servo Control variables
+const int PIN_SERVO = 3;
 int stepSize = 1;
 int servoPosition = 90;
 
@@ -28,7 +29,7 @@ void setup()
 {
   lcd.clear(); 
   lcd.begin(16, 2);
-  myServo.attach(3);
+  myServo.attach(PIN_SERVO);
   printStatus();
 }
 
@@ -53,10 +54,9 @@ void loop()
   adc_key_in = analogRead(0);      // read the value from the sensor 
   key = get_key(adc_key_in);       // convert into key press
  
-  //TODO: make LCD keys control motor.  Make Up/Down set the step size, and Left/Right increase/decrease position by the current step size.
-  // Also, output the current stepsize and position on the LCD
+  //TODO: make LCD keys control motor as per the lab manual
 
-  oldkey = key;
+
   myServo.write(servoPosition);
   delay(100);
 }

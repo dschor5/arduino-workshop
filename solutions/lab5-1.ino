@@ -17,6 +17,7 @@ int key = KEY_NONE;
 
 
 //Servo Control variables
+const int PIN_SERVO = 3;
 int stepSize = 1;
 int servoPosition = 90;
 
@@ -25,7 +26,7 @@ Servo myServo;
 void setup()
 {
 
-  myServo.attach(3);
+  myServo.attach(PIN_SERVO);
 
 }
 
