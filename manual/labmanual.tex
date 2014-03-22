@@ -382,11 +382,15 @@ myServo.write(90);	//move the servo to the 90 degree (neutral) position
 
 \section{Control position with left/right buttons}
 
+In this section, use the `Left' and `Right' keys on the LCD interface to increase/decrease the rotational position of the servo motor.  See {\em lab5.ino} for a starting point!
+
 
 %part 2 - use up/down to adjust step size, display state on LCD
 
 
 \section{Control step size with up/down buttons}
+
+In addition to the controls for the `Left' and `Right' keys, use the `Up' and `Down' buttons on the LCD interface to increase the step size.  
 
 \end{homeworkProblem}
 \clearpage
@@ -398,7 +402,7 @@ myServo.write(90);	//move the servo to the 90 degree (neutral) position
 
 \begin{homeworkProblem}[Continuous Servo Motor]
 
-In the hobbyist RC market, the servo protocol is widely used - some remote control receivers output standard servo pulses for all channels, for example.  In some instances, hobbyists want to control a standard motor from these servo commands.  As you have likely found, however, regular servos have a limited rotation range, so to get around this, `continuous rotation' servos have become commercially available.  These typically do not have any speed control - only forwards, backwards, or stop.  In our lab apparatus, we use a continuous rotation servo to control the conveyor belt.  For this example, connect the continuous servo's pulse pin to {\em D11} on the arduino.  Refer to Figure ~\ref{continuousServo} for a connection diagram.
+In the hobbyist RC market, the servo protocol is widely used - some remote control receivers output standard servo pulses for all channels, for example.  In some instances, hobbyists want to control a standard motor from these servo commands.  As you have likely found, regular servos have a limited rotation range. Hobbyists began modifying `standard' Servos so that they could do continuous rotation.  This got popular enough that `continuous rotation' servos became commercially available.  These typically do not have any speed control - only forwards, backwards, or stop.  In our lab apparatus, we use a continuous rotation servo to control the conveyor belt.  For this example, connect the continuous servo's pulse pin to {\em D11} on the arduino.  Refer to Figure ~\ref{continuousServo} for a connection diagram.
 
 
 
@@ -411,10 +415,10 @@ In the hobbyist RC market, the servo protocol is widely used - some remote contr
 
 %part 1- move via serial
 \section{Control via Serial Port}
-For part 1, control your continuous rotation servo via serial command.  This is a common technique to control arduino-based hardware from a PC - it is easy to write programs that communicate via USB serial port.
+For part 1, control your continuous rotation servo via serial command.  This is a common technique to control arduino-based hardware from a PC - it is easy to write programs that communicate via USB serial port.  Refer to Listing ~\ref{serialEventCode} for an example on how to read serial output from a PC, and check out {\em lab6.ino  } for a starting point for the following exercises!
 
 
-\begin{lstlisting}[language=C]
+\begin{lstlisting}[language={C},caption={serialEvent example for obtaining PC output},label={serialEventCode}]
 
 
 // serialEvent() is called after every iteration of 'loop', when there is serial data 
@@ -427,11 +431,7 @@ void serialEvent()
     char inChar = Serial.read();  // Serial.read() returns the first character in 
                                   // the serial receive buffer
 
-    /*
-
-    Act on serial data here
-
-    */
+    //  Act on serial data here
   }
 
 }
@@ -446,13 +446,13 @@ Move the continuous rotation servo via LCD interface.  The controls should work 
 \item holding Left or Right should make the servo rotate clockwise or counterclockwise, respectively
 \item the motor should not move when no keys are pressed
 \end{itemize}
-See {\em lab5-2.ino} for a starting point!
+See {\em lab6.ino} for a starting point!
 
 
 %part 3 - move until optical satisfies
 \section{Control via optical sensor}
 Move the continuous rotation servo until the optical sensor becomes obstructed.  
-See {\em lab5-3.ino} for a starting point!
+See {\em lab6.ino} for a starting point!
 
 \end{homeworkProblem}
 \clearpage
@@ -473,10 +473,22 @@ The user should be able to:
 \begin{itemize}
 \item Use the left/right buttons to move the conveyor belt
 \item Use the up/down buttons to move the lifter assembly
-\item Use the 'Select' button to push the extruder
+\item Use the ``Select'' button to push the extruder
 \end{itemize}
 
-This will allow you to determine timing constants for the various operations required for the full integration in exercise 8
+This will allow you to determine timing constants for the various operations required for the full integration in exercise 8.
+This portion of the lab exercise will require you to come up and test on the lone lab apparatus - please be courteous and allow for other participants to test their designs as well!
+
+The following connections will be made already, you will simply bring up your programmed arduino.  These are already established in the starting code in {\em lab7.ino}:
+
+\begin{itemize}
+
+\item Regular Servo on pin D3 - this controls the lifter assembly
+\item Continuous Rotation servo on pin D11 - this controls the conveyor belt
+\item LCD connections remain unchanged from previous examples
+\item A motor controller has been added to control the cookie dough extrusion motor.  This has been abstracted for you in the example code - simply call {\em pushExtruder()}, {\em pullExtruder()}, and {\em stopExtruder()} as necessary!
+
+\end{itemize}
 
 \end{homeworkProblem}
 \clearpage
@@ -489,13 +501,32 @@ This will allow you to determine timing constants for the various operations req
 \begin{homeworkProblem}[System Integration - Automatic Mode]
 
 
-In automatic mode, the user should be able to push the "Select" button and print {\em at least two} cookies on the tray.  A state machine approach is recommended, and provided partially in the example code.  
+
+In automatic mode, the user should be able to push the ``Select'' button and print {\em at least two} cookies on the tray.  A state machine approach is recommended, and provided partially in the example code, {\em lab8.ino}.
+
+The arduino should check the optical sensor on pin 2 - If there is no tray underneath the extruder, do not try to push out any dough! This is accomplished as shown in Listing ~\ref{readOpticalSensor}.
+
+\begin{lstlisting}[language={C},caption={Reading the optical sensor},label={readOpticalSensor}]
+
+//input pin for the sensor
+const int PIN_TRAY_SENSOR=2;
+
+//set pin as input
+pinMode(PIN_TRAY_SENSOR,INPUT);
+
+//to check the sensor...
+if (digitalRead(PIN_TRAY_SENSOR)==LOW)
+{
+  Serial.println("Tray is covering the sensor");
+}
+
+\end{lstlisting}
 
 
 Super bonus awesome points: Let the user select the number of cookies to print via the LCD interface... but keep a safety check to ensure the extruder only actuates when there is a tray underneath it!
 
 \end{homeworkProblem}
-\clearpage
+%\clearpage
 
 
 \end{document}

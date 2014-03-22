@@ -119,7 +119,7 @@ void loop()
   {
    case STATE_WAIT_INPUT:
 
-     //TODO: Compelte State logic
+     //TODO: Complete State logic
 
    break;
    case STATE_MOVE_EXTRUDER:
