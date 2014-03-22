@@ -166,7 +166,7 @@ int readKey(void)
   {
     if(key < keyMapping[index])
     {
-       return index; 
+       return keyMapping[index]; 
     }
   }
    
