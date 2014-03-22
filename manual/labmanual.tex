@@ -275,6 +275,9 @@ Once your code is working, add an LED connected between PIN 13 and GND. Nothing 
 
 Arduino abstracts analog reads into functions that are independent on the type of converter. When a value is read using analogRead(PIN), it returns a value between 0 and 1023 which maps to 0~V to 5~V respectively. 
 
+Example 4 uses an optical sensor. The sensor has an LED on the side marked with the letter "S". The anode (+) is the top pin and can be connected to pin 13 on the board. The cathode can be connected to ground. This allows you to turn on/off the sensor using an I/O pin. The other side acts like a phototransistor. The top pin is the analog value and the bottom is ground. When you connect this circuit and open the serial monitor, you will see the values change when blocking the sensor (i.e., putting a piece of paper to block the light). 
+
+Your tasks is to write a program that turns on an external LED when the sensor is blocked.
 
 \end{homeworkProblem}
 \clearpage
