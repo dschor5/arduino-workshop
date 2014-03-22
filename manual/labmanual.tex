@@ -254,9 +254,13 @@ Other important menus to note are:
 
 \section{Using on-board LED}
 
+Download and run "Example2.ino". You will see the on-board LED blink at  1~Hz. 
 
+Modify the program to blink the message "COOKIES" in morse code. The LED should be ON for 500~ms for a dash, and 200~ms for a dot. The spacing between symbols should be 200~ms and 600~ms between words. Fill in the blank for the sendLetter(), dot(), and dash() functions of the lab.
 
 \section{Adding an LED to the Arduino}
+
+Once your code is working, add an LED connected between PIN 13 and GND. Nothing should change, but now your program will control the external LED.
 
 \end{homeworkProblem}
 \clearpage
@@ -267,6 +271,8 @@ Other important menus to note are:
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}[Optical Sensor]
+
+Arduino abstracts analog reads into functions that are independent on the type of converter. When a value is read using analogRead(PIN), it returns a value between 0 and 1023 which maps to 0~V to 5~V respectively. 
 
 
 \end{homeworkProblem}
@@ -279,7 +285,21 @@ Other important menus to note are:
 
 \begin{homeworkProblem}[LCD Shield]
 
+The Liquid Crystal Display (LCD) used in this lab has two rows of 16 characters. To control it, we can use the LCD library from Arduino found in \url{http://arduino.cc/en/Reference/LiquidCrystal}. This is a generic library that allows you to connect multiple types of LCDs, send text, scroll text, and more. 
+
 \section{Writing to the display}
+
+Example 3a shows how to configure this LCD shield and write text to the screen. This will print "IEEE Workshop" on the first line and then blink the messages, "Troy!" and "I want cookies!" on the second line. 
+
+The key commands from the library are:
+\begin{description}
+\item[lcd.clear()] - Clear the LCD.
+\item[lcd.begin(COLS,ROWS)] - Initialize the LCD and specify the number of rows and columns for the particular model being used.
+\item[lcd.setCursor(COL,ROW)] - Set the cursor to the position specified by the arguments COL and ROW. 
+\item[lcd.print(MSG)] - Print the given message to the LCD starting at the position of the cursor. If the message is too long it truncates it and ignores the rest.
+\end{description}
+
+Your task is to use the LCD library to write "IEEE Workshop" and "I want cookies!" to the two lines on the LCD. Then, in the loop, scroll the text all the way left (until you can't see anything), all the way right (until it is outside the screen), and loop again. 
 
 \section{Button interactions}
 
