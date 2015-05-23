@@ -1,1 +1,0 @@
-Lab #5: Regular Servo Motor

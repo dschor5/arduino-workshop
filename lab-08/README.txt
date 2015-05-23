@@ -1,1 +1,0 @@
-Lab #8: Automated Cookie Maker
