@@ -1,1 +1,1 @@
-Lab #1: Installing the Arduino IDE
+Example 1: Blinking the onboard LED
